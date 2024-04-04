@@ -31,10 +31,41 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # 国际化
+  flutter_localizations:
+    sdk: flutter
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
+
+  # GetX is an extra-light and powerful solution for Flutter. 
+  # It combines high-performance state management, 
+  # intelligent dependency injection, 
+  # and route management quickly and practically.
+  get: ^4.6.6
+
+  # Wraps platform-specific persistent storage for simple data 
+  # Data may be persisted to disk asynchronously, 
+  # and there is no guarantee that writes will be persisted to disk after returning, 
+  # so this plugin must not be used for storing critical data.
+  shared_preferences: ^2.2.2
+
+  # A powerful HTTP networking package for Dart/Flutter, 
+  # supports Global configuration, Interceptors, FormData, 
+  # Request cancellation, File uploading/downloading, Timeout, Custom adapters, Transformers, etc.
+  dio: ^5.4.2+1
+
+  # This Flutter plugin provides an API for querying information about an application package.
+  package_info_plus: ^6.0.0
+
+  # Get current device information from within the Flutter application.
+  device_info_plus: ^10.0.1
+
+  # A set of cryptographic hashing functions for Dart.
+  crypto: ^3.0.3
+
 
 dev_dependencies:
   flutter_test:
@@ -59,9 +90,10 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/images/
+    - assets/svg/
+    - assets/lottie/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
