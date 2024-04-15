@@ -4,12 +4,12 @@ import 'package:get/get.dart';
 import '../index.dart';
 
 /// 第一次欢迎页面
-class MiddlewareHome extends GetMiddleware {
+class MiddlewareApplocationView extends GetMiddleware {
   @override
   RouteSettings? redirect(String? route) {
-    if (!ConfigController.to.isUsedApp) {
-      return const RouteSettings(name: MyRoutes.welcome);
+    if (ConfigController.to.isUsedApp) {
+      return null;
     }
-    return null;
+    return const RouteSettings(name: MyRoutes.welcome);
   }
 }

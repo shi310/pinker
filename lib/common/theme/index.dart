@@ -1,4 +1,5 @@
 library theme;
 
-export 'theme.dart';
-export 'extenion.dart';
+export 'my_colors.dart';
+export 'my_styles.dart';
+export 'my_theme.dart';

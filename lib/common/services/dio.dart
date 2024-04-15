@@ -150,10 +150,23 @@ class DioService extends GetxService {
         cancelToken: cancelToken,
         onReceiveProgress: onReceiveProgress,
       );
+
+      // 日志输出
+      MyLogger.w('请求数据成功...');
+      MyLogger.w('statusCode:${response.statusCode}');
+      MyLogger.w('statusMessage:${response.statusMessage}');
+      MyLogger.w('data:${response.data}');
+
       return response;
     } on DioException catch (err) {
       var errorEntity = createErrorEntity(err);
       if (errorCallBack != null) await errorCallBack(errorEntity);
+
+      // 日志输出
+      MyLogger.w('请求失败...');
+      MyLogger.w('code:${errorEntity.code}');
+      MyLogger.w('message:${errorEntity.message}');
+
       return null;
     }
   }
@@ -188,10 +201,23 @@ class DioService extends GetxService {
         onSendProgress: onSendProgress,
         onReceiveProgress: onReceiveProgress,
       );
+
+      // 日志输出
+      MyLogger.w('请求数据成功...');
+      MyLogger.w('statusCode:${response.statusCode}');
+      MyLogger.w('statusMessage:${response.statusMessage}');
+      MyLogger.w('data:${response.data}');
+
       return response;
     } on DioException catch (err) {
-      var eInfo = createErrorEntity(err);
-      if (errorCallBack != null) await errorCallBack(eInfo);
+      var errorEntity = createErrorEntity(err);
+      if (errorCallBack != null) await errorCallBack(errorEntity);
+
+      // 日志输出
+      MyLogger.w('请求失败...');
+      MyLogger.w('code:${errorEntity.code}');
+      MyLogger.w('message:${errorEntity.message}');
+
       return null;
     }
   }

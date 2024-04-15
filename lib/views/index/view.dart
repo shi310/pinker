@@ -1,36 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'index.dart';
+import '../../common/index.dart';
+import '../index.dart';
 
 class IndexView extends GetView<IndexController> {
   const IndexView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    /// appbar
-    var appBar = AppBar(
-      title: const Text('Index'),
-    );
-
-    var body = Center(
-      child: Column(
-        children: [
-          const SizedBox(height: 20),
-          Obx(() => controller.state.isGetDone
-              ? FilledButton(
-                  onPressed: controller.onTetrisView,
-                  child: const Text('立'),
-                )
-              : const Text('正在获取配置信息...')),
-        ],
-      ),
-    );
-
-    /// 页面构成
     return Scaffold(
-      appBar: appBar,
-      body: body,
+      appBar: _buildAppBar(context),
+      extendBodyBehindAppBar: true,
+      body: _buildBody(context),
+    );
+  }
+
+  AppBar _buildAppBar(BuildContext context) {
+    return AppBar(
+      actions: [
+        _buildSkipAdButton(context),
+        const SizedBox(width: 16), // Maintain consistent padding
+      ],
+      backgroundColor: Colors.transparent, // Ensure AppBar is transparent
+      elevation: 0, // Remove shadow
+    );
+  }
+
+  Widget _buildSkipAdButton(BuildContext context) {
+    return MyButton(
+        height: 32,
+        color: Theme.of(context).primaryColor.withOpacity(0.2),
+        onTap: controller.onApplicationView,
+        child: Obx(
+          () => Text(
+            '${Lang.indexViewSkipAdsAfter.tr} ${controller.advertiseTime - controller.state.timer} ${Lang.indexeViewSeconds.tr}',
+            style: Theme.of(context).textTheme.titleSmall,
+          ),
+        ));
+  }
+
+  Widget _buildBody(BuildContext context) {
+    return Image.asset(
+      'assets/images/ads_01.jpg',
+      fit: BoxFit.cover,
+      width: double.infinity,
+      height: double.infinity,
     );
   }
 }

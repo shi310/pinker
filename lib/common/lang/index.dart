@@ -1,3 +1,3 @@
 library lang;
 
-export 'lang.dart';
+export 'my_translation.dart';

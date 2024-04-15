@@ -2,29 +2,29 @@
 class ResponseModel {
   ResponseModel({
     required this.code,
-    this.data,
-    required this.message,
+    required this.data,
+    required this.msg,
   });
 
   int code;
-  Map<String, dynamic>? data;
-  String message;
+  Map<String, dynamic> data;
+  String msg;
 
   factory ResponseModel.fromJson(Map<String, dynamic> json) => ResponseModel(
         code: json["code"],
         data: json["data"],
-        message: json["message"],
+        msg: json["msg"],
       );
 
   Map<String, dynamic> toJson() => {
         "code": code,
         "data": data,
-        "message": message,
+        "msg": msg,
       };
 
   factory ResponseModel.err() => ResponseModel(
         code: -200,
         data: {},
-        message: 'message',
+        msg: 'msg',
       );
 }

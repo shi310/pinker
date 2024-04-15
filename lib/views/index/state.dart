@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 class IndexState {
-  final _isGetDone = false.obs;
-  set isGetDone(bool value) => _isGetDone.value = value;
-  bool get isGetDone => _isGetDone.value;
+  final _timer = 0.obs;
+  set timer(int value) => _timer.value = value;
+  int get timer => _timer.value;
 }

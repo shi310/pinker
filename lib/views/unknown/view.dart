@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pinker/common/index.dart';
 
 import 'index.dart';
 
@@ -10,7 +11,7 @@ class UnknownView extends GetView<UnknownController> {
   Widget build(BuildContext context) {
     /// appbar
     var appBar = AppBar(
-      title: const Text('Unknown Page'),
+      title: Text(Lang.unknownViewTltle.tr),
     );
 
     /// 页面构成

@@ -58,13 +58,35 @@ dependencies:
   dio: ^5.4.2+1
 
   # This Flutter plugin provides an API for querying information about an application package.
-  package_info_plus: ^6.0.0
+  package_info_plus: ^7.0.0
 
   # Get current device information from within the Flutter application.
-  device_info_plus: ^10.0.1
+  device_info_plus: ^10.1.0
 
   # A set of cryptographic hashing functions for Dart.
   crypto: ^3.0.3
+
+  # Draw SVG files using Flutter.
+  flutter_svg: ^2.0.10+1
+
+  # Lottie is a mobile library for Android and iOS that parses Adobe After Effects 
+  # animations exported as json with Bodymovin and renders them natively on mobile!
+  lottie: ^3.1.0
+
+  # Flutter library to load and cache network images. 
+  # Can also be used with placeholder and error widgets
+  cached_network_image: ^3.3.1
+
+  # A Flutter plugin for iOS, Android and Web for playing back video on a Widget surface.
+  video_player: ^2.8.5
+
+  # ======================================================== not like 100%
+  # The video player for Flutter with a heart of gold.
+  chewie: ^1.8.1
+
+  # Like Button is a flutter library that allows you to create a button with animation effects similar to 
+  # Twitter's heart when you like something and animation effects to increase like count.
+  like_button: ^2.0.5
 
 
 dev_dependencies:

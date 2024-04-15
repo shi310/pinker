@@ -1,6 +1,6 @@
 library routes;
 
-export 'names.dart';
-export 'navigator.dart';
-export 'pages.dart';
-export 'transition.dart';
+export 'my_routes.dart';
+export 'my_pages.dart';
+export 'my_transition.dart';
+export 'my_navigator.dart';

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:get/get.dart';
 
 import '../../common/index.dart';
@@ -5,26 +7,41 @@ import '../index.dart';
 
 class IndexController extends GetxController {
   final state = IndexState();
-  void onTetrisView() {
-    Get.offAllNamed(MyRoutes.home);
+  late Timer _timer;
+  final int advertiseTime = 6;
+
+  @override
+  void onReady() {
+    super.onReady();
+    startTimer();
   }
 
-  Future<void> getConfig() async {
-    await MyTimer.futureDelayed(milliseconds: 3000);
-    var res = await ConfigApi.getconfig();
-    if (res != null && res.code == 200) {
-      state.isGetDone = true;
-      if (res.data != null) UserController.to.salt = res.data!['salt'];
-    } else {
-      for (int i = 0; i < 3; i++) {
-        getConfig();
-      }
-    }
+  void startTimer() {
+    const oneSec = Duration(seconds: 1);
+    _timer = Timer.periodic(
+      oneSec,
+      (Timer timer) {
+        state.timer++;
+        if (state.timer >= advertiseTime) {
+          stopTimer();
+          onApplicationView();
+        }
+      },
+    );
+  }
+
+  void stopTimer() {
+    _timer.cancel();
+  }
+
+  void onApplicationView() {
+    stopTimer();
+    Get.offAllNamed(MyRoutes.welcome);
   }
 
   @override
-  Future<void> onReady() async {
-    super.onReady();
-    await getConfig();
+  void onClose() {
+    stopTimer();
+    super.onClose();
   }
 }
