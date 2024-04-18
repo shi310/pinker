@@ -67,7 +67,9 @@ class _MyVideoPlayerState extends State<MyVideoPlayer> {
     videoPlayerController.dispose().then((value) {
       chewieController.dispose();
       initPlayer(widget.videoUrl);
-      isShowLoading = true;
+      setState(() {
+        isShowLoading = true;
+      });
     });
 
     super.didUpdateWidget(oldWidget);

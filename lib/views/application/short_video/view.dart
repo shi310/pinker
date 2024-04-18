@@ -28,7 +28,8 @@ class ShortVideoView extends StatelessWidget {
     final shortList = controller.state.shortList;
 
     return PageView.builder(
-      itemBuilder: (context, index) => itemBuilder(context, index, controller),
+      itemBuilder: (context, index) =>
+          _buildPageItem(context, index, controller),
       itemCount: shortList.value.list.length,
       scrollDirection: Axis.vertical,
       onPageChanged: controller.onPageChanged,
@@ -36,15 +37,28 @@ class ShortVideoView extends StatelessWidget {
     );
   }
 
-  Widget itemBuilder(
+  Widget _buildPageItem(
     BuildContext context,
     int index,
     ShortVideoController controller,
   ) {
-    final shortList = controller.state.shortList;
-    final title = Text(shortList.value.list[index].name);
+    return Stack(
+      children: [
+        _buildVideoPlayer(controller, index),
+        _buildVideoInfo(controller, context, index),
+      ],
+    );
+  }
 
+  Widget _buildVideoInfo(
+    ShortVideoController controller,
+    BuildContext context,
+    int index,
+  ) {
+    final shortList = controller.state.shortList;
     final value = shortList.value.list[index];
+
+    final title = Text(shortList.value.list[index].name);
 
     final yearChildren = [
       if (value.score != null) '★ ${value.score!}',
@@ -68,42 +82,32 @@ class ShortVideoView extends StatelessWidget {
     );
 
     final contentBoxChildren = [
+      const Spacer(),
       Row(children: [title, const Spacer(), playButton]),
       const SizedBox(height: 8),
       if (yearChildren.isNotEmpty) Text(yearChildrenString),
       if (value.actors != null) Text('演员: ${value.actors!}'),
       if (value.director != null) Text('导演: ${value.director!}'),
       if (value.introduce != null) Text('剧情: ${value.introduce!}', maxLines: 1),
+      const SizedBox(height: 20),
     ];
 
-    final videoInfoChild = Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: contentBoxChildren,
-    );
-
-    final videoInfo = Column(
-      children: [
-        const Spacer(),
-        Padding(
-          padding: const EdgeInsets.all(20),
-          child: videoInfoChild,
-        ),
-      ],
-    );
-
-    return Stack(
-      children: [
-        Obx(() => _buildVideoPlayer(controller, value, index)),
-        videoInfo,
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: contentBoxChildren,
+      ),
     );
   }
 
   Widget _buildVideoPlayer(
     ShortVideoController controller,
-    DataResourceModel value,
     int index,
   ) {
+    final shortList = controller.state.shortList;
+    final value = shortList.value.list[index];
+
     const loading = MyAssets(
       name: 'loading',
       tyle: AssetsTyle.lottie,
