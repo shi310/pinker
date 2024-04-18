@@ -10,12 +10,10 @@ class MyVideoPlayer extends StatefulWidget {
     super.key,
     required this.videoUrl,
     required this.imageUrl,
-    // required this.valueKey,
   });
 
   final String videoUrl;
   final String imageUrl;
-  // final int valueKey;
 
   @override
   State<MyVideoPlayer> createState() => _MyVideoPlayerState();

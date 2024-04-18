@@ -47,7 +47,6 @@ class VideoPlayerView extends GetView<VideoPlayerViewController> {
         () => MyVideoPlayer(
           videoUrl: state.videoUrl,
           imageUrl: state.imagetUrl,
-          // valueKey: controller.state.resourceData.value.id,
         ),
       ),
     );

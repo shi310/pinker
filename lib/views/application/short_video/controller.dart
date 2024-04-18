@@ -5,8 +5,6 @@ import 'index.dart';
 class ShortVideoController extends GetxController {
   final state = ShortVideoState();
 
-  int pageIndex = 0;
-
   // 需要影视列表
   Future<void> getShortList() async {
     var response = await ResourceApi.getResourceList(type: 1);
@@ -19,6 +17,10 @@ class ShortVideoController extends GetxController {
       });
       state.isShowLoading = false;
     }
+  }
+
+  void onPageChanged(int index) {
+    state.pageIndex = index;
   }
 
   @override

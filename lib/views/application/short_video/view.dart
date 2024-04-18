@@ -12,31 +12,28 @@ class ShortVideoView extends StatelessWidget {
     return GetBuilder<ShortVideoController>(
       init: ShortVideoController(),
       builder: (controller) {
-        return Scaffold(
-          body: _buildBody(context, controller),
-          extendBodyBehindAppBar: true,
-          extendBody: true,
-          backgroundColor: Theme.of(context).colorScheme.background,
-        );
+        return Obx(() => _buildBody(context, controller));
       },
     );
   }
 
   Widget _buildBody(BuildContext context, ShortVideoController controller) {
+    if (controller.state.isShowLoading) {
+      return const MyAssets(
+        name: 'loading',
+        tyle: AssetsTyle.lottie,
+      );
+    }
+
     final shortList = controller.state.shortList;
 
-    return Obx(() {
-      const neverScroll = NeverScrollableScrollPhysics();
-      final physics = controller.state.isShowLoading ? neverScroll : null;
-      return PageView.builder(
-        itemBuilder: (context, index) =>
-            itemBuilder(context, index, controller),
-        itemCount: shortList.value.list.length,
-        scrollDirection: Axis.vertical,
-        onPageChanged: (int index) {},
-        physics: physics,
-      );
-    });
+    return PageView.builder(
+      itemBuilder: (context, index) => itemBuilder(context, index, controller),
+      itemCount: shortList.value.list.length,
+      scrollDirection: Axis.vertical,
+      onPageChanged: controller.onPageChanged,
+      physics: const BouncingScrollPhysics(),
+    );
   }
 
   Widget itemBuilder(
@@ -45,7 +42,7 @@ class ShortVideoView extends StatelessWidget {
     ShortVideoController controller,
   ) {
     final shortList = controller.state.shortList;
-    final title = Obx(() => Text(shortList.value.list[index].name));
+    final title = Text(shortList.value.list[index].name);
 
     final value = shortList.value.list[index];
 
@@ -94,31 +91,30 @@ class ShortVideoView extends StatelessWidget {
       ],
     );
 
-    final videoBox = Container(
-      width: Get.width,
-      height: Get.height,
-      decoration: const BoxDecoration(
-        shape: BoxShape.rectangle,
-        color: MyColors.black,
-      ),
-      clipBehavior: Clip.hardEdge,
-      child: Obx(() => controller.state.isShowLoading
-          ? const MyAssets(
-              name: 'loading',
-              tyle: AssetsTyle.lottie,
-            )
-          : MyVideoPlayer(
-              videoUrl: shortList
-                  .value.list[controller.pageIndex].playUrls[0].urls[0],
-              imageUrl: shortList.value.list[controller.pageIndex].image,
-            )),
-    );
-
     return Stack(
       children: [
-        videoBox,
+        Obx(() => _buildVideoPlayer(controller, value, index)),
         videoInfo,
       ],
     );
+  }
+
+  Widget _buildVideoPlayer(
+    ShortVideoController controller,
+    DataResourceModel value,
+    int index,
+  ) {
+    const loading = MyAssets(
+      name: 'loading',
+      tyle: AssetsTyle.lottie,
+    );
+    if (controller.state.isShowLoading) return loading;
+
+    final videoPlayer = MyVideoPlayer(
+      videoUrl: value.playUrls[0].urls[0],
+      imageUrl: value.image,
+    );
+
+    return videoPlayer;
   }
 }
