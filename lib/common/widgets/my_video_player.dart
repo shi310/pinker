@@ -63,7 +63,12 @@ class _MyVideoPlayerState extends State<MyVideoPlayer> {
     // 页面刷新的时候
     // 先暂停旧的视频，然后重新初始化
     videoPlayerController.pause();
-    initPlayer(widget.videoUrl);
+
+    videoPlayerController.dispose().then((value) {
+      chewieController.dispose();
+      initPlayer(widget.videoUrl);
+      isShowLoading = true;
+    });
 
     super.didUpdateWidget(oldWidget);
   }
