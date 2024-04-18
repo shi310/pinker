@@ -69,13 +69,13 @@ class DioService extends GetxService {
   );
 
   @override
-  void onReady() {
+  void onInit() {
     // 添加配置
     dio.options = options;
 
     // 添加拦截器
     dio.interceptors.add(interceptorsWrapper);
-    super.onReady();
+    super.onInit();
   }
 
   // 错误信息
@@ -153,6 +153,7 @@ class DioService extends GetxService {
 
       // 日志输出
       MyLogger.w('请求数据成功...');
+      MyLogger.w('接口地址: $path');
       MyLogger.w('statusCode:${response.statusCode}');
       MyLogger.w('statusMessage:${response.statusMessage}');
       MyLogger.w('data:${response.data}');
@@ -164,6 +165,7 @@ class DioService extends GetxService {
 
       // 日志输出
       MyLogger.w('请求失败...');
+      MyLogger.w('接口地址: $path');
       MyLogger.w('code:${errorEntity.code}');
       MyLogger.w('message:${errorEntity.message}');
 
@@ -204,6 +206,7 @@ class DioService extends GetxService {
 
       // 日志输出
       MyLogger.w('请求数据成功...');
+      MyLogger.w('接口地址: $path');
       MyLogger.w('statusCode:${response.statusCode}');
       MyLogger.w('statusMessage:${response.statusMessage}');
       MyLogger.w('data:${response.data}');
@@ -215,6 +218,7 @@ class DioService extends GetxService {
 
       // 日志输出
       MyLogger.w('请求失败...');
+      MyLogger.w('接口地址: $path');
       MyLogger.w('code:${errorEntity.code}');
       MyLogger.w('message:${errorEntity.message}');
 

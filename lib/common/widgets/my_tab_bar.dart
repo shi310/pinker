@@ -3,8 +3,12 @@ import 'package:get/get.dart';
 import 'package:pinker/common/index.dart';
 
 class MyTabBar extends StatelessWidget {
-  const MyTabBar(
-      {super.key, required this.tabs, required this.onTap, this.color});
+  const MyTabBar({
+    super.key,
+    required this.tabs,
+    required this.onTap,
+    this.color,
+  });
 
   final List<String> tabs;
   final void Function(BuildContext context, int) onTap;

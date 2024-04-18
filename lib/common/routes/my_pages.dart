@@ -32,13 +32,24 @@ class MyPages {
       page: () => const ApplicationView(),
       binding: ApplicationBinding(),
       middlewares: [MiddlewareApplocationView()],
+      transition: Transition.fade,
+      transitionDuration: const Duration(milliseconds: 500),
     ),
 
-    // 主页面
+    // 视频播放页面
     GetPage(
       name: MyRoutes.videoPlay,
       page: () => const VideoPlayerView(),
       binding: VideoPlayerViewBinding(),
+      transition: Transition.fade,
+      transitionDuration: const Duration(milliseconds: 500),
+    ),
+
+    // 搜索页面
+    GetPage(
+      name: MyRoutes.search,
+      page: () => const SearchViewView(),
+      binding: SearchViewBinding(),
     ),
   ];
 }

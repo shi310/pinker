@@ -55,7 +55,12 @@ class HomeView extends StatelessWidget {
                 color: Theme.of(context).applicationsearchButtonLine2,
               ),
               const SizedBox(width: 20),
-              Center(child: MyIcons.search),
+              const Center(
+                child: MyAssets(
+                  name: 'search',
+                  tyle: AssetsTyle.svg,
+                ),
+              ),
               const SizedBox(width: 20),
             ],
           ),
@@ -65,7 +70,10 @@ class HomeView extends StatelessWidget {
 
     final appBarChild = Row(
       children: [
-        MyIcons.logo(),
+        const MyAssets(
+          name: 'logo',
+          tyle: AssetsTyle.svg,
+        ),
         const SizedBox(width: 16),
         Expanded(child: searchBox),
       ],
@@ -87,7 +95,7 @@ class HomeView extends StatelessWidget {
             backgroundColor: Colors.transparent,
             title: appBarChild,
             elevation: 2,
-            surfaceTintColor: Colors.transparent,
+            // surfaceTintColor: Colors.transparent,
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(40),
               child: tabBar,

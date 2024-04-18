@@ -15,10 +15,10 @@ class MyRoutes {
   static const home = '/home';
 
   // resourceHall - 影视大厅：2
-  static const resourceHall = '/resourceHall';
+  static const resourceHall = '/resource_hall';
 
   // shortVideo - 短视频：3
-  static const shortVideo = '/shortVideo';
+  static const shortVideo = '/short_video';
 
   // my - 我的页面：4
   static const my = '/my';
@@ -34,4 +34,7 @@ class MyRoutes {
 
   // 媒体播放页面
   static const videoPlay = '/video_play';
+
+  // 搜索页面
+  static const search = '/search_view';
 }

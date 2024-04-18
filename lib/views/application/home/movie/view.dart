@@ -28,7 +28,7 @@ class MovieViewView extends GetView<MovieViewController> {
         }
 
         Widget bodyBuilder() {
-          var lottie = MyIcons.lottieHolder(fit: BoxFit.fill);
+          const lottie = MyAssets(name: 'loading', tyle: AssetsTyle.lottie);
 
           var bannerPage = PageView.builder(
             itemBuilder: itemBuilder,
@@ -103,7 +103,9 @@ class MovieViewView extends GetView<MovieViewController> {
                   MyMediaBox(
                     mediaDataList: media.list,
                     title: media.title,
+                    isHero: true,
                   ),
+              const SizedBox(height: 20),
             ],
           );
         }

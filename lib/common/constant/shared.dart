@@ -16,7 +16,10 @@ const String sharedAreaNameKey = 'shared_area_name_key';
 const String sharedLocalKey = 'shared_local_key';
 
 // 资源
-const String sharedNoticesIdKey = 'sharedNoticesIdKey';
+const String sharedNoticesIdKey = 'shared_notices_id_key';
 
 // storageFavoritesIdKey
-const String sharedFavoritesIdKey = 'sharedFavoritesIdKey';
+const String sharedFavoritesIdKey = 'shared_favorites_id_key';
+
+// 搜索历史
+const String sharedSearchHistoryKey = 'shared_search_history_key';

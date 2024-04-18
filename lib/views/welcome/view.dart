@@ -11,25 +11,25 @@ class WelcomeView extends GetView<WelcomeController> {
   Widget build(BuildContext context) {
     final page1 = _buildPage(
       context: context,
-      icon: MyIcons.init_1,
+      imageName: 'init_1',
       title: Lang.welcomeViewTitle_01,
       content: Lang.welcomeViewContent_01,
     );
 
     final page2 = _buildPage(
       context: context,
-      icon: MyIcons.init_2,
+      imageName: 'init_2',
       title: Lang.welcomeViewTitle_02,
       content: Lang.welcomeViewContent_02,
     );
 
     final page3 = _buildPage(
       context: context,
-      icon: MyIcons.init_3,
+      imageName: 'init_3',
       title: Lang.welcomeViewTitle_03,
       content: Lang.welcomeViewContent_03,
       button: SizedBox(
-        width: double.infinity,
+        width: Get.width * 0.6,
         height: 40,
         child: FilledButton(
           onPressed: controller.onApplocationView,
@@ -40,16 +40,12 @@ class WelcomeView extends GetView<WelcomeController> {
       ),
     );
 
-    final tabBar = Padding(
-      padding: const EdgeInsets.only(bottom: 40),
-      child: SizedBox(
-        width: 50,
-        height: 20,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children:
-              List.generate(3, (index) => _buildIndicator(index, context)),
-        ),
+    final tabBar = SizedBox(
+      width: 50,
+      height: 20,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: List.generate(3, (index) => _buildIndicator(index, context)),
       ),
     );
 
@@ -74,7 +70,7 @@ class WelcomeView extends GetView<WelcomeController> {
 
   // 提取创建页面的方法
   Widget _buildPage({
-    required Widget icon,
+    required String imageName,
     required String title,
     required String content,
     required BuildContext context,
@@ -82,26 +78,37 @@ class WelcomeView extends GetView<WelcomeController> {
   }) {
     return Center(
       child: SizedBox(
-        width: Get.width * 0.7,
+        width: Get.width * 0.75,
         height: Get.height,
         child: Column(
           children: [
-            const SizedBox(height: 40),
-            icon,
-            const SizedBox(height: 40),
-            Text(
-              title.tr,
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
             const SizedBox(height: 20),
-            Text(
-              content.tr,
-              style: Theme.of(context).textTheme.bodySmall,
+            MyAssets(
+              name: imageName,
+              tyle: AssetsTyle.svg,
+              width: Get.width * 0.7,
+            ),
+            const SizedBox(height: 40),
+            Expanded(
+              child: Column(
+                children: [
+                  Text(
+                    title.tr,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    content.tr,
+                    style: Theme.of(context).textTheme.bodySmall,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
             ),
             if (button != null) ...[
-              const Spacer(),
+              const SizedBox(height: 20),
               button,
-              const SizedBox(height: 80),
+              const SizedBox(height: 40),
             ]
           ],
         ),

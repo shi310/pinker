@@ -65,7 +65,11 @@ class MyBanner extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              MyIcons.play(), // 假设MyIcons.play()返回一个Widget
+              MyAssets(
+                name: 'play',
+                tyle: AssetsTyle.svg,
+                color: Theme.of(context).primaryColor,
+              ), // 假设MyAssets.play()返回一个Widget
               const SizedBox(height: 10),
               Text(
                 title,

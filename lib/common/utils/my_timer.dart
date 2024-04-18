@@ -2,7 +2,7 @@ import 'dart:async';
 
 class MyTimer {
   /// 时间戳转时间
-  String getDate(int value) {
+  static String getDate(int value) {
     var valueToString = value.toString();
     late int timeValue;
 
@@ -75,9 +75,9 @@ class MyTimer {
   }
 
   /// 等待
-  Future<dynamic> futureDelayed({
-    required int milliseconds,
-  }) async {
+  static Future<dynamic> futureDelayed(
+    int milliseconds,
+  ) async {
     await Future.delayed(Duration(milliseconds: milliseconds));
   }
 }

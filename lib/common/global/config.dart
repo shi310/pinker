@@ -142,13 +142,22 @@ class ConfigController extends GetxController {
     // 显示顶部栏(隐藏底部栏，没有这个的话底部状态栏的透明度无法实现)
     await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
-    const style = SystemUiOverlayStyle(
+    // 状态栏和导航栏的颜色样式
+    final style = SystemUiOverlayStyle(
+      // 状态栏的背景颜色，这里设为透明
       statusBarColor: Colors.transparent,
+      // 导航栏的背景颜色，这里设为透明
       systemNavigationBarColor: Colors.transparent,
+      // 导航栏与内容之间的分割线颜色，这里设为透明
       systemNavigationBarDividerColor: Colors.transparent,
-      systemNavigationBarIconBrightness: Brightness.light,
-      statusBarIconBrightness: Brightness.light,
-      statusBarBrightness: Brightness.dark,
+      // 导航栏图标的亮度，这里设为亮色
+      systemNavigationBarIconBrightness:
+          Get.isPlatformDarkMode ? Brightness.dark : Brightness.dark,
+      // 状态栏图标的亮度，这里设为亮色
+      statusBarIconBrightness:
+          Get.isPlatformDarkMode ? Brightness.dark : Brightness.dark,
+      // 状态栏的亮度，这里设为暗色
+      statusBarBrightness: Theme.of(Get.context!).colorScheme.brightness,
     );
 
     SystemChrome.setSystemUIOverlayStyle(style);

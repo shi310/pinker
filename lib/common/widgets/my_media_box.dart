@@ -9,11 +9,13 @@ class MyMediaBox extends StatelessWidget {
     this.title,
     required this.mediaDataList,
     this.onTap,
+    this.isHero = false,
   });
 
   final String? title;
   final List<DataResourceModel> mediaDataList;
   final void Function(DataResourceModel resourceData)? onTap;
+  final bool isHero;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class MyMediaBox extends StatelessWidget {
         height: (screenWidth - 40) / 3 * 36 / 26,
       );
 
-      return MyButton(
+      final mediaButton = MyButton(
         width: (screenWidth - 20 - 32) / 3,
         onTap: () {
           if (onTap != null) {
@@ -58,6 +60,10 @@ class MyMediaBox extends StatelessWidget {
           ],
         ),
       );
+
+      return isHero
+          ? Hero(tag: resourceData.id, child: mediaButton)
+          : mediaButton;
     }
 
     return Padding(
@@ -84,7 +90,7 @@ class MyMediaBox extends StatelessWidget {
   }
 
   static Widget loading() {
-    final lottie = MyIcons.lottieHolder(fit: BoxFit.fill);
+    const lottie = MyAssets(name: 'loading', tyle: AssetsTyle.lottie);
 
     final lottieMoiveBox = Expanded(
       child: Column(
@@ -111,7 +117,7 @@ class MyMediaBox extends StatelessWidget {
             width: 80,
             height: 14,
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
-            child: lottie,
+            child: const Opacity(opacity: 0.5, child: lottie),
           ),
         ],
       ),

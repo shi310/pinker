@@ -33,7 +33,9 @@ class HomeController extends GetxController {
     await getSearchWord();
   }
 
-  void onSearchView() {}
+  void onSearchView() {
+    Get.toNamed(MyRoutes.search, arguments: state.searchWord);
+  }
 
   Future<void> getSearchWord() async {
     var response = await HomeApi.getSearchWord();

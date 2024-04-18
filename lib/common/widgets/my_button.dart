@@ -37,16 +37,15 @@ class _MyButtonState extends State<MyButton>
     if (widget.isDebouncing) {
       setState(() {
         isDisable = true;
-        isTapDown = true;
+        isTapDown = false;
       });
+      widget.onTap?.call();
       await Future.delayed(const Duration(milliseconds: 500));
       if (mounted) {
         setState(() {
           isDisable = false;
-          isTapDown = false;
         });
       }
-      widget.onTap?.call();
     }
   }
 
@@ -74,7 +73,8 @@ class _MyButtonState extends State<MyButton>
       onTapDown: widget.onTap == null
           ? null
           : (details) => setState(() => isTapDown = true),
-      onTapUp: widget.onTap == null ? null : (details) => handleTap(),
+      onTapUp:
+          widget.onTap == null || isDisable ? null : (details) => handleTap(),
       onTapCancel: () => setState(() => isTapDown = false),
       child: Opacity(
         opacity: isTapDown ? 0.5 : 1,

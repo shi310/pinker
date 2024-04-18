@@ -15,6 +15,7 @@ abstract class Lang {
   static const search = 'search';
   static const enter = 'enter';
   static const defaultHintText = 'default_hint_text';
+  static const retry = 'retry';
 
   // 未知页面
   static const unknownViewTltle = 'unknown_view_title';

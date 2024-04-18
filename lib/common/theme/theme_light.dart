@@ -29,17 +29,17 @@ ThemeData getThemeLight() {
       bodySmall: TextStyle(
         color: MyColors.black.withOpacity(0.6),
         fontSize: 14,
-        height: 2,
+        height: 1.5,
       ),
       bodyMedium: const TextStyle(
         color: MyColors.black,
         fontSize: 14,
-        height: 2,
+        height: 1.5,
       ),
       bodyLarge: const TextStyle(
         color: MyColors.black,
         fontSize: 16,
-        height: 2,
+        height: 1.5,
       ),
       titleSmall: const TextStyle(
         color: MyColors.primaryColor,
@@ -92,6 +92,7 @@ ThemeData getThemeLight() {
     appBarTheme: const AppBarTheme(
       elevation: 0,
       centerTitle: true,
+      surfaceTintColor: Colors.transparent,
       titleTextStyle: TextStyle(
         color: MyColors.black,
         fontSize: 18,

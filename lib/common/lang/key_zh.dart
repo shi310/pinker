@@ -15,6 +15,7 @@ const Map<String, String> zh = {
   Lang.password: '密码',
   Lang.enter: '请输入文本',
   Lang.defaultHintText: '请输入提示文本',
+  Lang.retry: '重试',
 
   // 未知页面
   Lang.unknownViewTltle: 'Unknown Page',

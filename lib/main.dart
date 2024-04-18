@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       defaultTransition: Transition.rightToLeftWithFade, // 默认过渡动画。
       getPages: MyPages.getPages, // 页面列表。
       popGesture: true, // 是否启用滑动返回手势。
-      transitionDuration: const Duration(milliseconds: 300), // 过渡动画的持续时间。
+      transitionDuration: const Duration(milliseconds: 500), // 过渡动画的持续时间。
       unknownRoute: MyPages.unknownRoute, // 未知路由。
     );
   }

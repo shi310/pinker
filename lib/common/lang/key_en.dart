@@ -15,6 +15,7 @@ const Map<String, String> en = {
   Lang.password: 'Password',
   Lang.enter: 'Please enter text',
   Lang.defaultHintText: 'Please enter hint text',
+  Lang.retry: 'Retry',
 
   // 未知页面
   Lang.unknownViewTltle: 'Unknown Page',
@@ -38,7 +39,7 @@ const Map<String, String> en = {
 
   // Applocation页面
   Lang.applocationViewHome: 'Home',
-  Lang.applocationViewResourceHall: 'ResourceHall',
-  Lang.applocationViewShortVideo: 'ShortVideo',
+  Lang.applocationViewResourceHall: 'Resource Hall',
+  Lang.applocationViewShortVideo: 'Short Video',
   Lang.applocationViewMy: 'My',
 };

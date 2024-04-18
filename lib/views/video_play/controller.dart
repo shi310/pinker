@@ -1,100 +1,55 @@
-import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinker/common/index.dart';
 import 'package:pinker/views/index.dart';
-import 'package:video_player/video_player.dart';
 
 class VideoPlayerViewController extends GetxController {
   final state = VideoPlayerViewState();
-
   final pageController = PageController();
-
   final DataResourceModel arguments = Get.arguments;
-
   final scrollController = ScrollController();
-
-  final customControls = CupertinoControls(
-    backgroundColor: MyColors.geryTranslucent.withOpacity(0.3),
-    iconColor: MyColors.white,
-  );
-
   final homeController = Get.find<HomeController>();
 
   bool isFavorites = false;
 
-  ChewieController? chewieController;
-  VideoPlayerController? videoPlayerController;
-
   void guessPlay(DataResourceModel resourceData) async {
     if (resourceData.id == state.resourceData.value.id) return;
 
-    isFavorites = false;
-    state.pageIndex = 0;
-    state.chooise = [0, 0];
     state.resourceData.value = resourceData;
     state.resourceData.update((val) {});
+
+    state.videoUrl = resourceData.playUrls[0].urls[0];
+    state.imagetUrl = resourceData.image;
+
+    state.pageIndex = 0;
+    state.chooise = [0, 0];
+    isFavorites = false;
 
     state.resourceList.value.list.clear();
     state.resourceList.update((val) {});
 
+    MyLogger.w(
+      'video_play => resourceData刷新 : ${state.resourceData.value.toJson()}',
+    );
+
     for (var data in homeController.favoritesId) {
       if (data == resourceData.id.toString()) isFavorites = true;
     }
-    getResourceList(resourceData.id);
-    await initPlayer(resourceData.playUrls[0].urls[0]);
+
+    await getGuessDataList(resourceData.id);
+    MyLogger.w(
+      'video_play => resourceList刷新 : ${state.resourceList.value.toJson()}',
+    );
   }
 
-  void listener() async {
-    if (!chewieController!.isFullScreen) {
-      // WakelockPlus.enable();
-
-      await ConfigController.to.setPreferredOrientations();
-      if (ConfigController.to.platform == 'android') {
-        await ConfigController.to.setTransparentStatusBar();
-      }
-    }
-  }
-
-  Future<void> initPlayer(String url) async {
-    if (videoPlayerController != null) {
-      await videoPlayerController!.dispose();
-      videoPlayerController = null;
-      if (chewieController != null) {
-        chewieController!.removeListener(listener);
-        chewieController!.dispose();
-        chewieController = null;
-      }
-    }
-
-    state.isShowLoading = true;
-    videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(url));
-    await videoPlayerController!.initialize();
-
-    if (videoPlayerController!.value.isInitialized) {
-      chewieController = ChewieController(
-        videoPlayerController: videoPlayerController!,
-        autoPlay: false,
-        customControls: customControls,
-      );
-
-      state.isShowLoading = false;
-
-      chewieController!.addListener(listener);
-    } else {
-      videoPlayerController!.dispose();
-      videoPlayerController = null;
-    }
-  }
-
-  Future<void> getResourceList(int guessId) async {
-    var getResoureList = await ResourceApi.getResourceList(
+  Future<void> getGuessDataList(int guessId) async {
+    var response = await ResourceApi.getResourceList(
       type: 1,
       guessId: guessId,
     );
 
-    if (getResoureList != null && getResoureList.code == 200) {
-      var resoureList = DataResourceList.fromJson(getResoureList.data);
+    if (response != null && response.code == 200) {
+      final resoureList = DataResourceList.fromJson(response.data);
 
       state.resourceList.update((val) {
         val!.list = resoureList.list;
@@ -131,13 +86,18 @@ class VideoPlayerViewController extends GetxController {
 
   @override
   void onInit() {
+    // 首先把拿到的视频数据传入视频组件
+    // 这样视频组件就可以完成初始化
+    state.videoUrl = arguments.playUrls[0].urls[0];
+    state.imagetUrl = arguments.image;
+
+    // 然后更新本页面的状态数据
+    // 方便刷新界面
     state.resourceData.value = arguments;
     state.resourceData.update((value) {});
 
-    // playUrl = state.resourceData.value.playUrls[0].urls[0];
-
-    // state.isLoading = false;
-
+    // 比较本地的收藏列表数据
+    // 如果发现ID一直，就打上已收藏的标志
     for (var data in homeController.favoritesId) {
       if (data == state.resourceData.value.id.toString()) isFavorites = true;
     }
@@ -151,25 +111,8 @@ class VideoPlayerViewController extends GetxController {
   @override
   void onReady() async {
     // WakelockPlus.enable();
-    await getResourceList(state.resourceData.value.id);
-    await initPlayer(state.resourceData.value.playUrls[0].urls[0]);
-
+    // 拿到猜你喜欢的数据列表
+    await getGuessDataList(state.resourceData.value.id);
     super.onReady();
-  }
-
-  @override
-  void onClose() {
-    if (videoPlayerController != null) {
-      videoPlayerController!.dispose();
-    }
-
-    if (chewieController != null) {
-      chewieController!.removeListener(listener);
-      chewieController!.dispose();
-    }
-
-    // WakelockPlus.disable();
-
-    super.onClose();
   }
 }

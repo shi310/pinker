@@ -39,6 +39,30 @@ class ResourceApi {
     return response != null ? ResponseModel.fromJson(response.data) : null;
   }
 
+  static Future<ResponseModel?> getHotList({
+    required int type,
+    int? pageNo,
+    void Function(int, int)? onReceiveProgress,
+    int? pageSize,
+    Future<void> Function(ErrorModel)? errorCallBack,
+    CancelToken? cancelToken,
+  }) async {
+    Response? response = await DioService.to.get(
+      '/resource/getHotList',
+      options: Options(headers: {'token': UserController.to.token}),
+      queryParameters: {
+        'type': type,
+        'pageNo': pageNo,
+        'pageSize': pageSize ?? 20,
+      },
+      onReceiveProgress: onReceiveProgress,
+      errorCallBack: errorCallBack,
+      cancelToken: cancelToken,
+    );
+
+    return response != null ? ResponseModel.fromJson(response.data) : null;
+  }
+
   static Future<ResponseModel?> getResourceType({
     required int type,
     Future<void> Function(ErrorModel)? errorCallBack,

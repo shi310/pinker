@@ -38,8 +38,10 @@ class MyImage extends StatelessWidget {
         errorWidget: (context, url, error) => Container(
           color: Theme.of(context).primaryColor,
         ),
-        progressIndicatorBuilder: (context, url, progress) =>
-            MyIcons.lottieHolder(fit: BoxFit.fill),
+        progressIndicatorBuilder: (context, url, progress) => const MyAssets(
+          name: 'loading',
+          tyle: AssetsTyle.lottie,
+        ),
         fadeInDuration: const Duration(milliseconds: 2000),
       ),
     );

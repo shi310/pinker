@@ -41,8 +41,9 @@ class IndexView extends GetView<IndexController> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return Image.asset(
-      'assets/images/ads_01.jpg',
+    return const MyAssets(
+      name: 'ads_01',
+      tyle: AssetsTyle.jpg,
       fit: BoxFit.cover,
       width: double.infinity,
       height: double.infinity,

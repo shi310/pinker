@@ -1,6 +1,6 @@
 class MyCharacter {
   /// 格式化金额
-  String getMoney(
+  static String getMoney(
     double value, {
     int? fixed,
   }) {
@@ -45,7 +45,7 @@ class MyCharacter {
   }
 
   /// 数组转字符串
-  String getListToString(List value, {String? spacer}) {
+  static String getListToString(List value, {String? spacer}) {
     String valueInt = '';
     for (int i = 0; i < value.length; i++) {
       if (spacer == null || i == value.length - 1) {
@@ -58,20 +58,20 @@ class MyCharacter {
   }
 
   /// 取字符串后两位:隐藏手机号码
-  String getLastTwo(String value) {
+  static String getLastTwo(String value) {
     if (value.isEmpty) return '';
     return value.substring(value.length - 2);
   }
 
   /// 隐藏邮箱地址
-  String getEmailHide(String value) {
+  static String getEmailHide(String value) {
     if (value.isEmpty) return '';
     List<String> part_1 = value.split('@');
     return '${getLastTwo(part_1[0])}@${part_1[1]}';
   }
 
   /// 字符串去掉空白字符
-  String getClear(String value) {
+  static String getClear(String value) {
     return value.replaceAll(RegExp(r"\s+\b|\b\s"), '');
   }
 }

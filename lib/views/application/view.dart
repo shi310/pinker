@@ -24,23 +24,47 @@ class ApplicationView extends GetView<ApplicationController> {
     Widget buildBottomNavigationBar() {
       var bottomNavigationBarItems = [
         BottomNavigationBarItem(
-          activeIcon: MyIcons.bottomHome_2,
-          icon: MyIcons.bottomHome_1,
+          activeIcon: const MyAssets(
+            name: 'bottom_home_2',
+            tyle: AssetsTyle.svg,
+          ),
+          icon: const MyAssets(
+            name: 'bottom_home_1',
+            tyle: AssetsTyle.svg,
+          ),
           label: Lang.applocationViewHome.tr,
         ),
         BottomNavigationBarItem(
-          activeIcon: MyIcons.bottomSear_2,
-          icon: MyIcons.bottomSear_1,
+          activeIcon: const MyAssets(
+            name: 'bottom_sear_2',
+            tyle: AssetsTyle.svg,
+          ),
+          icon: const MyAssets(
+            name: 'bottom_sear_1',
+            tyle: AssetsTyle.svg,
+          ),
           label: Lang.applocationViewResourceHall.tr,
         ),
         BottomNavigationBarItem(
-          activeIcon: MyIcons.bottomIt_2,
-          icon: MyIcons.bottomIt_1,
+          activeIcon: const MyAssets(
+            name: 'bottom_it_2',
+            tyle: AssetsTyle.svg,
+          ),
+          icon: const MyAssets(
+            name: 'bottom_it_1',
+            tyle: AssetsTyle.svg,
+          ),
           label: Lang.applocationViewShortVideo.tr,
         ),
         BottomNavigationBarItem(
-          activeIcon: MyIcons.bottomMy_2,
-          icon: MyIcons.bottomMy_1,
+          activeIcon: const MyAssets(
+            name: 'bottom_my_2',
+            tyle: AssetsTyle.svg,
+          ),
+          icon: const MyAssets(
+            name: 'bottom_my_1',
+            tyle: AssetsTyle.svg,
+          ),
           label: Lang.applocationViewMy.tr,
         ),
       ];
