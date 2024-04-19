@@ -31,48 +31,47 @@ class ShortVideoController extends GetxController {
 
       state.isShowLoading = false;
     }
-
-    print('\n');
-
-    print(state.shortList.value.list.length);
-    print(videoPlayerControllers.length);
-
-    print('\n');
   }
 
-  // 初始化控制器
-  // 以 pageIndex 为中心，初始化前5个和5个
-
-  void initVideoController(int index) {
-    for (int i = 0; i < state.shortList.value.list.length; i++) {
-      if (i < index - 5 || i > index + 5) {
-        videoPlayerControllers[i]?.pause().then((value) {
-          return videoPlayerControllers[i]?.dispose();
-        }).then((value) => videoPlayerControllers[i] = null);
-      } else {
-        if (videoPlayerControllers[i] == null) {
-          videoPlayerControllers[i] = VideoPlayerController.networkUrl(
-              Uri.parse(state.shortList.value.list[i].playUrls[0].urls[0]));
-          try {
-            videoPlayerControllers[i]!.initialize();
-          } catch (e) {
-            print(e);
-          }
-        }
-      }
-    }
+  void onVideoPlayer(int index, DataResourceModel value) {
+    videoPlayerControllers[index]?.pause();
+    Get.toNamed(MyRoutes.videoPlay, arguments: value)?.then((value) {
+      videoPlayerControllers[index]?.play();
+    });
   }
 
   void onPageChanged(int index) {
+    videoPlayerControllers[pageIndex]?.pause();
+
+    if (index < pageIndex) {
+      if (pageIndex + 2 < videoPlayerControllers.length) {
+        videoPlayerControllers[pageIndex + 2]?.dispose();
+        videoPlayerControllers[pageIndex + 2] = null;
+      }
+
+      if (pageIndex - 3 >= 0) {
+        videoPlayerControllers[pageIndex - 3] =
+            VideoPlayerController.networkUrl(Uri.parse(
+                state.shortList.value.list[pageIndex - 3].playUrls[0].urls[0]));
+        videoPlayerControllers[pageIndex - 3]?.initialize();
+      }
+    } else {
+      if (pageIndex - 2 >= 0) {
+        videoPlayerControllers[pageIndex - 2]?.dispose();
+        videoPlayerControllers[pageIndex - 2] = null;
+      }
+
+      if (pageIndex + 3 < videoPlayerControllers.length) {
+        videoPlayerControllers[pageIndex + 3] =
+            VideoPlayerController.networkUrl(Uri.parse(
+                state.shortList.value.list[pageIndex + 3].playUrls[0].urls[0]));
+        videoPlayerControllers[pageIndex + 3]?.initialize();
+      }
+    }
+
     pageIndex = index;
-    if (index != 0) {
-      videoPlayerControllers[index - 1]?.pause();
-    }
-    if (index != videoPlayerControllers.length - 1) {
-      videoPlayerControllers[index + 1]?.pause();
-    }
+
     videoPlayerControllers[index]?.play();
-    initVideoController(index);
 
     if (index == state.shortList.value.list.length - 5) {
       getShortList();
@@ -83,7 +82,17 @@ class ShortVideoController extends GetxController {
   void onReady() {
     super.onReady();
     getShortList().then((value) {
-      initVideoController(0);
+      videoPlayerControllers[0] = VideoPlayerController.networkUrl(
+          Uri.parse(state.shortList.value.list[0].playUrls[0].urls[0]));
+      videoPlayerControllers[0]?.initialize();
+
+      videoPlayerControllers[1] = VideoPlayerController.networkUrl(
+          Uri.parse(state.shortList.value.list[1].playUrls[0].urls[0]));
+      videoPlayerControllers[1]?.initialize();
+
+      videoPlayerControllers[2] = VideoPlayerController.networkUrl(
+          Uri.parse(state.shortList.value.list[2].playUrls[0].urls[0]));
+      videoPlayerControllers[2]?.initialize();
     });
 
     ever(applicationController.state.pageIndex, (index) {

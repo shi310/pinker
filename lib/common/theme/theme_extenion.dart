@@ -19,13 +19,14 @@ extension ThemeExtenion on ThemeData {
   /// 可以设置字号，高度
   /// - 可以设置单色，不会随主题变动
   /// - 可以设置双色， 随主题改变而改变哦
-  TextStyle getTextStyle({
-    double? fontSize,
-    double? height,
-    Color? color,
-    Color? secondColor,
-  }) {
+  TextStyle getTextStyle(
+      {double? fontSize,
+      double? height,
+      Color? color,
+      Color? secondColor,
+      List<Shadow>? shadows}) {
     return TextStyle(
+      shadows: shadows,
       fontSize: fontSize,
       color: color != null && secondColor != null
           ? (Get.isDarkMode ? secondColor : primaryColor)

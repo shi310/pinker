@@ -141,6 +141,7 @@ class VideoPlayerView extends GetView<VideoPlayerViewController> {
 
           // 播放按钮
           return MyButton(
+            height: 32,
             color: isChooise
                 ? Theme.of(context).primaryColor
                 : Theme.of(context).colorScheme.onBackground.withOpacity(0.3),
@@ -165,7 +166,7 @@ class VideoPlayerView extends GetView<VideoPlayerViewController> {
       // 播放地址可能不是一个，所以播放地址用的是滑动组件
       // 播放地址这里是动态的，所以需要obx包裹
       final partsBox = SizedBox(
-        height: 40,
+        height: 32,
         child: PageView.builder(
           itemBuilder: pageViewBuild,
           itemCount: resourceData.value.playUrls.length,

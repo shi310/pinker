@@ -31,7 +31,14 @@ class ShortVideoView extends StatelessWidget {
             final shortList = controller.state.shortList;
             final value = shortList.value.list[index];
 
-            final title = Text(shortList.value.list[index].name);
+            final title = Text(
+              shortList.value.list[index].name,
+              style: Theme.of(context).getTextStyle(
+                color: MyColors.white,
+                fontSize: 20,
+                height: 1.1,
+              ),
+            );
 
             final yearChildren = [
               if (value.score != null) '★ ${value.score!}',
@@ -49,21 +56,49 @@ class ShortVideoView extends StatelessWidget {
                 MyCharacter.getListToString(yearChildren);
 
             final playButton = MyButton(
-              onTap: () {},
+              onTap: () => controller.onVideoPlayer(index, value),
               color: Theme.of(context).primaryColor,
-              padding: const EdgeInsets.fromLTRB(10, 4, 10, 4),
-              child: const Text('查看完整版'),
+              height: 32,
+              child: Text('查看完整版', style: Theme.of(context).myTextStyleLight),
             );
 
             final contentBoxChildren = [
               const Spacer(),
               Row(children: [title, const Spacer(), playButton]),
               const SizedBox(height: 8),
-              if (yearChildren.isNotEmpty) Text(yearChildrenString),
-              if (value.actors != null) Text('演员: ${value.actors!}'),
-              if (value.director != null) Text('导演: ${value.director!}'),
+              if (yearChildren.isNotEmpty)
+                Text(
+                  yearChildrenString,
+                  style: Theme.of(context).getTextStyle(
+                    color: MyColors.white,
+                    fontSize: 14,
+                  ),
+                ),
+              if (value.actors != null)
+                Text(
+                  '演员: ${value.actors!}',
+                  style: Theme.of(context).getTextStyle(
+                    color: MyColors.white,
+                    fontSize: 14,
+                  ),
+                ),
+              if (value.director != null)
+                Text(
+                  '导演: ${value.director!}',
+                  style: Theme.of(context).getTextStyle(
+                    color: MyColors.white,
+                    fontSize: 14,
+                  ),
+                ),
               if (value.introduce != null)
-                Text('剧情: ${value.introduce!}', maxLines: 1),
+                Text(
+                  '剧情: ${value.introduce!}',
+                  maxLines: 1,
+                  style: Theme.of(context).getTextStyle(
+                    color: MyColors.white,
+                    fontSize: 14,
+                  ),
+                ),
               const SizedBox(height: 20),
             ];
 
