@@ -6,7 +6,7 @@ class ApplicationController extends GetxController {
   final state = ApplicationState();
 
   void onBottomNavigation(int index) {
-    if (state.index == index) return;
-    state.index = index;
+    if (state.pageIndex.value == index) return;
+    state.pageIndex.value = index;
   }
 }

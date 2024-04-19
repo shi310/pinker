@@ -1,10 +1,11 @@
 import 'package:get/get.dart';
 import 'package:pinker/common/index.dart';
+import 'package:pinker/views/index.dart';
 import 'package:video_player/video_player.dart';
-import 'index.dart';
 
 class ShortVideoController extends GetxController {
   final state = ShortVideoState();
+  final ApplicationController applicationController = Get.find();
 
   // 视频控制器的集合，每一个视频都有一个控制
   // 加载方式：懒加载
@@ -30,6 +31,13 @@ class ShortVideoController extends GetxController {
 
       state.isShowLoading = false;
     }
+
+    print('\n');
+
+    print(state.shortList.value.list.length);
+    print(videoPlayerControllers.length);
+
+    print('\n');
   }
 
   // 初始化控制器
@@ -38,20 +46,21 @@ class ShortVideoController extends GetxController {
   void initVideoController(int index) {
     for (int i = 0; i < state.shortList.value.list.length; i++) {
       if (i < index - 5 || i > index + 5) {
-        videoPlayerControllers[i]?.pause();
-        videoPlayerControllers[i]?.dispose();
-        videoPlayerControllers[i] = null;
+        videoPlayerControllers[i]?.pause().then((value) {
+          return videoPlayerControllers[i]?.dispose();
+        }).then((value) => videoPlayerControllers[i] = null);
       } else {
         if (videoPlayerControllers[i] == null) {
           videoPlayerControllers[i] = VideoPlayerController.networkUrl(
               Uri.parse(state.shortList.value.list[i].playUrls[0].urls[0]));
-          videoPlayerControllers[i]!.initialize();
+          try {
+            videoPlayerControllers[i]!.initialize();
+          } catch (e) {
+            print(e);
+          }
         }
       }
     }
-
-    MyLogger.w(state.shortList.value.list.length.toString());
-    MyLogger.w(videoPlayerControllers.toString());
   }
 
   void onPageChanged(int index) {
@@ -59,8 +68,15 @@ class ShortVideoController extends GetxController {
     if (index != 0) {
       videoPlayerControllers[index - 1]?.pause();
     }
+    if (index != videoPlayerControllers.length - 1) {
+      videoPlayerControllers[index + 1]?.pause();
+    }
     videoPlayerControllers[index]?.play();
     initVideoController(index);
+
+    if (index == state.shortList.value.list.length - 5) {
+      getShortList();
+    }
   }
 
   @override
@@ -68,7 +84,14 @@ class ShortVideoController extends GetxController {
     super.onReady();
     getShortList().then((value) {
       initVideoController(0);
-      videoPlayerControllers[0]?.play();
+    });
+
+    ever(applicationController.state.pageIndex, (index) {
+      if (index != 2) {
+        videoPlayerControllers[pageIndex]?.pause();
+      } else {
+        videoPlayerControllers[pageIndex]?.play();
+      }
     });
   }
 }

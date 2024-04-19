@@ -11,7 +11,7 @@ class ApplicationView extends GetView<ApplicationController> {
   @override
   Widget build(BuildContext context) {
     final body = Obx(() => IndexedStack(
-          index: controller.state.index,
+          index: controller.state.pageIndex.value,
           children: const [
             HomeView(),
             ResourceHallView(),
@@ -73,7 +73,7 @@ class ApplicationView extends GetView<ApplicationController> {
         onTap: controller.onBottomNavigation,
         items: bottomNavigationBarItems,
         type: BottomNavigationBarType.fixed,
-        currentIndex: controller.state.index,
+        currentIndex: controller.state.pageIndex.value,
         backgroundColor: Theme.of(context).colorScheme.background,
         selectedFontSize: 12,
         selectedItemColor: Theme.of(context).primaryColor,
