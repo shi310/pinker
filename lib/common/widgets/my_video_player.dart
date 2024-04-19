@@ -54,7 +54,6 @@ class _MyVideoPlayerState extends State<MyVideoPlayer> {
   @override
   void initState() {
     initPlayer(widget.videoUrl);
-
     super.initState();
   }
 
@@ -140,5 +139,24 @@ class _MyVideoPlayerState extends State<MyVideoPlayer> {
             // key: ValueKey(widget.valueKey),
             controller: chewieController,
           );
+  }
+}
+
+class MyVideoPlayer2 extends StatefulWidget {
+  const MyVideoPlayer2({
+    super.key,
+    required this.controller,
+  });
+
+  final VideoPlayerController controller;
+
+  @override
+  State<MyVideoPlayer2> createState() => _MyVideoPlayer2State();
+}
+
+class _MyVideoPlayer2State extends State<MyVideoPlayer2> {
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
