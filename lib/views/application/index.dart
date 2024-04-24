@@ -1,4 +1,4 @@
-library view_application;
+library application_view;
 
 export 'binding.dart';
 export 'controller.dart';

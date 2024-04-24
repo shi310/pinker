@@ -1,4 +1,4 @@
-library application_movie_view;
+library application_view_home_series;
 
 export 'binding.dart';
 export 'controller.dart';

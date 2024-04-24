@@ -46,7 +46,7 @@ class MyTimer {
 
   /// 时间格式化
   /// 把秒数转成：00:00:00的格式
-  String getDuration(int value) {
+  static String getDuration(int value) {
     // 初始化
     // 首先默认所有的时间都是 0
     String seconds = '';
@@ -76,8 +76,14 @@ class MyTimer {
 
   /// 等待
   static Future<dynamic> futureDelayed(
-    int milliseconds,
-  ) async {
-    await Future.delayed(Duration(milliseconds: milliseconds));
+    int milliseconds, {
+    FutureOr<dynamic> Function()? computation,
+  }) async {
+    await Future.delayed(
+      Duration(
+        milliseconds: milliseconds,
+      ),
+      computation,
+    );
   }
 }

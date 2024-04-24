@@ -16,7 +16,13 @@ class ShortVideoController extends GetxController {
 
   // 需要影视列表
   Future<void> getShortList() async {
-    var response = await ResourceApi.getResourceList(type: 1);
+    var response = await ResourceApi.getResourceList(
+      type: 1,
+      errorCallBack: (erro) async {
+        await MyTimer.futureDelayed(1000);
+        await getShortList();
+      },
+    );
 
     if (response != null && response.code == 200) {
       var data = DataResourceList.fromJson(response.data);

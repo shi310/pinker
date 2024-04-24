@@ -4,13 +4,13 @@ import 'package:pinker/common/index.dart';
 
 import 'index.dart';
 
-class MovieViewView extends GetView<MovieViewController> {
-  const MovieViewView({super.key});
+class HomeSeriesViewView extends StatelessWidget {
+  const HomeSeriesViewView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<MovieViewController>(
-      init: MovieViewController(),
+    return GetBuilder<HomeSeriesViewController>(
+      init: HomeSeriesViewController(),
       builder: (controller) {
         /// 背景部分
         /// 背景是该页面的下层，也就是主要的内容展示区
@@ -93,7 +93,9 @@ class MovieViewView extends GetView<MovieViewController> {
             ],
           );
 
-          return Column(
+          return ListView(
+            controller: controller.scrollController,
+            padding: EdgeInsets.zero,
             children: [
               bannersBox,
               if (controller.state.medias.value.list.isEmpty)

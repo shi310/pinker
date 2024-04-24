@@ -46,6 +46,13 @@ class _MyButtonState extends State<MyButton>
           isDisable = false;
         });
       }
+    } else {
+      setState(() {
+        isDisable = false;
+        isTapDown = false;
+      });
+
+      widget.onTap?.call();
     }
   }
 

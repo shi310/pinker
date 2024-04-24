@@ -231,8 +231,8 @@ class TypeList {
   static Map<String, dynamic> child = {"size": 0, "list": <String>[]};
 }
 
-class ResourceResponseData {
-  ResourceResponseData({
+class DataResponseSearch {
+  DataResponseSearch({
     required this.type,
     this.year,
     this.country,
@@ -252,8 +252,8 @@ class ResourceResponseData {
   int? year;
   int? sort;
 
-  factory ResourceResponseData.fromJson(Map<String, dynamic> json) =>
-      ResourceResponseData(
+  factory DataResponseSearch.fromJson(Map<String, dynamic> json) =>
+      DataResponseSearch(
         type: json['type'],
         mediaType: json['mediaType'],
         pageNo: json['pageNo'],

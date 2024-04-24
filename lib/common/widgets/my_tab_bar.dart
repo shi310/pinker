@@ -7,12 +7,16 @@ class MyTabBar extends StatelessWidget {
     super.key,
     required this.tabs,
     required this.onTap,
-    this.color,
+    this.selectColor,
+    this.seclectTextStyle,
+    this.textStyle,
   });
 
   final List<String> tabs;
   final void Function(BuildContext context, int) onTap;
-  final Color? color;
+  final Color? selectColor;
+  final TextStyle? textStyle;
+  final TextStyle? seclectTextStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +46,14 @@ class MyTabBar extends StatelessWidget {
                       .colorScheme
                       .onBackground
                       .withOpacity(0.05),
-                  color: indexRx.value == index ? color : null,
+                  color: indexRx.value == index ? selectColor : null,
                   child: Text(
                     textAlign: TextAlign.center,
                     tabs[index],
                     style: indexRx.value == index
-                        ? Theme.of(context).textTheme.titleSmall
-                        : Theme.of(context).textTheme.labelMedium,
+                        ? seclectTextStyle ??
+                            Theme.of(context).textTheme.titleSmall
+                        : textStyle ?? Theme.of(context).textTheme.labelMedium,
                   ),
                 ),
               ),

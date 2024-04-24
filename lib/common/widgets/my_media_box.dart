@@ -89,7 +89,9 @@ class MyMediaBox extends StatelessWidget {
     );
   }
 
-  static Widget loading() {
+  static Widget loading({
+    bool isHaveTitle = true,
+  }) {
     const lottie = MyAssets(name: 'loading', tyle: AssetsTyle.lottie);
 
     final lottieMoiveBox = Expanded(
@@ -138,16 +140,21 @@ class MyMediaBox extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 20),
-          Container(
-            clipBehavior: Clip.antiAlias,
-            width: 160,
-            height: 20,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4),
+          if (isHaveTitle) const SizedBox(height: 20),
+          if (isHaveTitle)
+            Container(
+              clipBehavior: Clip.antiAlias,
+              width: 160,
+              height: 20,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: lottie,
             ),
-            child: lottie,
-          ),
+          if (isHaveTitle) const SizedBox(height: 20),
+          lottieRow,
+          const SizedBox(height: 20),
+          lottieRow,
           const SizedBox(height: 20),
           lottieRow,
           const SizedBox(height: 20),

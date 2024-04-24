@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinker/common/index.dart';
-import 'package:pinker/views/application/resource_hall/view.dart';
 
 import 'package:pinker/views/index.dart';
 

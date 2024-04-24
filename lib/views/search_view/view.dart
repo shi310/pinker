@@ -259,6 +259,7 @@ class SearchViewView extends GetView<SearchViewViewController> {
                   ),
                   const SizedBox(height: 5),
                   Container(
+                    padding: const EdgeInsets.only(right: 20),
                     clipBehavior: Clip.antiAlias,
                     width: 200,
                     height: 14,
@@ -272,6 +273,7 @@ class SearchViewView extends GetView<SearchViewViewController> {
                   ),
                   const Spacer(),
                   Container(
+                    padding: const EdgeInsets.only(right: 20),
                     clipBehavior: Clip.antiAlias,
                     width: 200,
                     height: 14,

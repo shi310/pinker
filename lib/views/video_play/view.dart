@@ -107,7 +107,7 @@ class VideoPlayerView extends GetView<VideoPlayerViewController> {
 
       // 这是播放地址的标题
       final playUrlsTitle = MyTabBar(
-        color: Theme.of(context).primaryColor.withOpacity(0.1),
+        selectColor: Theme.of(context).primaryColor.withOpacity(0.1),
         tabs: resourceData.value.playUrls.map((e) => e.title).toList(),
         onTap: controller.onTabBar,
       );
@@ -258,22 +258,14 @@ class VideoPlayerView extends GetView<VideoPlayerViewController> {
           : data;
     });
 
-    // 页面组成：不包含播放器的部分
-    final content = SingleChildScrollView(
-      controller: controller.scrollController,
-      child: Column(children: [
-        contentBox,
-        guessBox,
-        const SafeArea(top: false, child: SizedBox()),
-      ]),
-    );
-
     // 页面组成
-    final body = Column(children: [
+    final body = ListView(children: [
       // const SizedBox(height: 10),
       videBox,
       const SizedBox(height: 10),
-      Expanded(child: content),
+      contentBox,
+      guessBox,
+      const SafeArea(top: false, child: SizedBox()),
     ]);
 
     return Hero(

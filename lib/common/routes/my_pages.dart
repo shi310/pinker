@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:pinker/views/games/index.dart';
 
 import '../../views/index.dart';
 import '../index.dart';
@@ -50,6 +51,13 @@ class MyPages {
       name: MyRoutes.search,
       page: () => const SearchViewView(),
       binding: SearchViewBinding(),
+    ),
+
+    // 俄罗斯方块
+    GetPage(
+      name: MyRoutes.tetris,
+      page: () => const GameTertisView(),
+      binding: GameTertisBinding(),
     ),
   ];
 }

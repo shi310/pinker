@@ -55,11 +55,18 @@ class ShortVideoView extends StatelessWidget {
             final yearChildrenString =
                 MyCharacter.getListToString(yearChildren);
 
-            final playButton = MyButton(
-              onTap: () => controller.onVideoPlayer(index, value),
-              color: Theme.of(context).primaryColor,
-              height: 32,
-              child: Text('查看完整版', style: Theme.of(context).myTextStyleLight),
+            final playButton = Hero(
+              tag: value.id,
+              child: Material(
+                color: Colors.transparent,
+                child: MyButton(
+                  onTap: () => controller.onVideoPlayer(index, value),
+                  color: Theme.of(context).primaryColor,
+                  height: 32,
+                  child:
+                      Text('查看完整版', style: Theme.of(context).myTextStyleLight),
+                ),
+              ),
             );
 
             final contentBoxChildren = [

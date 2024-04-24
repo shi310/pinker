@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:pinker/common/index.dart';
 
-class MovieViewState {
+class HomeMoviesViewState {
   final banners = DataHomeModelBanners.fromJson(DataHomeModelBanners.child).obs;
   final medias = DataHomeModelMedias.fromJson(DataHomeModelMedias.child).obs;
 

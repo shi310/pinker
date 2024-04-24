@@ -1,4 +1,4 @@
-library application_view_short_video;
+library game_tetris;
 
 export 'binding.dart';
 export 'controller.dart';

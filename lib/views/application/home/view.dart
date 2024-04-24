@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pinker/views/index.dart';
 import '../../../common/index.dart';
 import 'index.dart';
 
@@ -129,20 +130,16 @@ class HomeView extends StatelessWidget {
   }
 
   Widget _buildBody(BuildContext context, HomeController controller) {
-    return SingleChildScrollView(
-      controller: controller.scrollController,
-      child: Obx(
-        () => IndexedStack(
-          index: controller.state.index,
-          children: const [
-            MovieViewView(),
-            // 替换成您实际的页面视图
-            Text("Page 2"),
-            Text("Page 3"),
-            Text("Page 4"),
-            Text("Page 5"),
-          ],
-        ),
+    return Obx(
+      () => IndexedStack(
+        index: controller.state.pageIindex.value,
+        children: const [
+          HomeMoviesViewView(),
+          HomeSeriesViewView(),
+          Text("Page 3"),
+          Text("Page 4"),
+          Text("Page 5"),
+        ],
       ),
     );
   }

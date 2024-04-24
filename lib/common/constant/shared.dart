@@ -23,3 +23,6 @@ const String sharedFavoritesIdKey = 'shared_favorites_id_key';
 
 // 搜索历史
 const String sharedSearchHistoryKey = 'shared_search_history_key';
+
+// 俄罗斯方块：历史最高分
+const String sharedTetrisHistroyKey = 'shared_tetris_history_key';

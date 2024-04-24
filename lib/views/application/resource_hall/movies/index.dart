@@ -1,4 +1,4 @@
-library application_view_short_video;
+library application_view_resource_movies;
 
 export 'binding.dart';
 export 'controller.dart';

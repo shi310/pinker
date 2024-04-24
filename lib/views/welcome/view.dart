@@ -31,10 +31,12 @@ class WelcomeView extends GetView<WelcomeController> {
       button: SizedBox(
         width: Get.width * 0.6,
         height: 40,
-        child: FilledButton(
-          onPressed: controller.onApplocationView,
+        child: MyButton(
+          color: Theme.of(context).primaryColor,
+          onTap: controller.onApplocationView,
           child: Text(
             Lang.welcomeViewButton.tr,
+            style: Theme.of(context).myTextStyleLight,
           ),
         ),
       ),
